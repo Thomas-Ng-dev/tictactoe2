@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private String playerInput()
     {
-        if((turnCount & 2) == 0)
+        if((turnCount % 2) == 0)
         {
-            return "X";
+            return "O";
         }
         else
         {
-            return "O";
+            return "X";
         }
     }
 
