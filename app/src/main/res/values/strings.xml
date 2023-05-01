@@ -3,5 +3,6 @@
     <string name="playerTurn">%s\'s turn to move</string>
 
     <string name="new_game">New Game</string>
+    <string name="gridHexValue"></string>
 
 </resources>
