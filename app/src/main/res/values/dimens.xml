@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="gridValueSize">50sp</dimen>
+    <dimen name="gridHexSize">130dp</dimen>
+    <dimen name="gridRow1TopMargin">5dp</dimen>
+    <dimen name="gridColumn1LeftMargin">5dp</dimen>
+    <dimen name="newGameMargin">50dp</dimen>
+</resources>
