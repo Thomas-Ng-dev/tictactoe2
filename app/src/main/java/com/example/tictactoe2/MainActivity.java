@@ -36,6 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // New Game button
         newGame = (Button) findViewById(R.id.newGame);
+        newGame.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                newGame();
+            }
+        });
     }
 
     @Override
@@ -95,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Winning conditions(rows, columns, diagonals)
         //  0, 1, 2     3, 4, 5     6, 7, 8
         //  0, 3, 6     1, 4, 7     2, 5, 8
-        //  0, 5, 8     2, 5, 7
+        //  0, 4, 8     2, 4, 7
         if(turnCount > 4)
         {
             if(grid[0].getText().toString().equals(grid[1].getText().toString()) && grid[1].getText().toString().equals(grid[2].getText().toString()) && !grid[0].getText().toString().equals("") ||
@@ -104,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     grid[0].getText().toString().equals(grid[3].getText().toString()) && grid[3].getText().toString().equals(grid[6].getText().toString()) && !grid[0].getText().toString().equals("") ||
                     grid[1].getText().toString().equals(grid[4].getText().toString()) && grid[4].getText().toString().equals(grid[7].getText().toString()) && !grid[3].getText().toString().equals("") ||
                     grid[2].getText().toString().equals(grid[5].getText().toString()) && grid[5].getText().toString().equals(grid[8].getText().toString()) && !grid[2].getText().toString().equals("") ||
-                    grid[0].getText().toString().equals(grid[5].getText().toString()) && grid[5].getText().toString().equals(grid[8].getText().toString()) && !grid[0].getText().toString().equals("") ||
-                    grid[2].getText().toString().equals(grid[5].getText().toString()) && grid[5].getText().toString().equals(grid[7].getText().toString()) && !grid[2].getText().toString().equals(""))
+                    grid[0].getText().toString().equals(grid[4].getText().toString()) && grid[4].getText().toString().equals(grid[8].getText().toString()) && !grid[0].getText().toString().equals("") ||
+                    grid[2].getText().toString().equals(grid[4].getText().toString()) && grid[4].getText().toString().equals(grid[6].getText().toString()) && !grid[2].getText().toString().equals(""))
             {
                 isGameComplete = true;
             }
@@ -114,10 +122,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return isGameComplete;
     }
 
+    /**
+     * Resets the game state
+     */
     public void newGame()
     {
         turnCount = 1;
         enableButtons();
+        for(int i = 0; i < grid.length; i++)
+        {
+            grid[i].setText("");
+        }
     }
     /**
      * Check which player's turn it is and gives X or O character output
