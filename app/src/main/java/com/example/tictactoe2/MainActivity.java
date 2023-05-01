@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView playerTurn;
     private Button[] grid = new Button[9];
     private Button newGame;
-    private boolean isGameComplete = false;
     private int turnCount = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +26,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Get the buttons that form the grid and attach listeners to them
         for(int i = 0; i < grid.length; i++)
         {
-            // Cannot use the findViewByID directly
-            String buttonID = "grid" + (i + 1);
+            // Cannot use string the findViewByID directly
+            String buttonID = "grid" + (i);
             int resourceID = getResources().getIdentifier(buttonID, "id", getPackageName());
             grid[i] = (Button) findViewById(resourceID);
             grid[i].setOnClickListener(this);
         }
 
+        // New Game button
+        newGame = (Button) findViewById(R.id.newGame);
     }
 
     @Override
@@ -47,11 +48,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         gridHex.setText(playerInput());
         disableButton(gridHex);
-        Log.i("turn1", "Current turn: " + turnCount);
+        Log.i("Current turn", String.valueOf(turnCount));
         turnCount++;
-        Log.i("turn2", "Next turn: " + turnCount);
+        Log.i("Next turn", String.valueOf(turnCount));
+    }
+    public boolean isGameComplete()
+    {
+        if(turnCount > 9)
+        {
+            disableButtons();
+            return true;
+        }
+        // Winning conditions(rows, columns, diagonals)
+        // 0, 1, 2
+        //
+//        if(turnCount > 4)
+//        {
+//
+//        }
+        return false;
     }
 
+    public void newGame()
+    {
+        turnCount = 1;
+        enableButtons();
+    }
     /**
      * Check which player's turn it is and gives X or O character output
      * @return
