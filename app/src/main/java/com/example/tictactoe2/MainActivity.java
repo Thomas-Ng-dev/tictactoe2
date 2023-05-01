@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView playerTurn;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean isGameComplete = false;
         if(turnCount > 9)
         {
-            playerTurn.setText("Draw!");
+            Toast.makeText(this, "Draw!", Toast.LENGTH_LONG).show();
             isGameComplete = true;
         }
         /*
