@@ -4,5 +4,6 @@
     <dimen name="gridHexSize">130dp</dimen>
     <dimen name="gridRow1TopMargin">5dp</dimen>
     <dimen name="gridColumn1LeftMargin">5dp</dimen>
+    <dimen name="gridMargin">6dp</dimen>
     <dimen name="newGameMargin">50dp</dimen>
 </resources>
