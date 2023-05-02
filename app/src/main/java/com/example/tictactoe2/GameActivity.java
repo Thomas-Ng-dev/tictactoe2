@@ -182,6 +182,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     winner = player1Name;
                 }
                 playerTurn.setText(String.format(message, winner));
+                return isGameComplete;
             }
         }
         if(turnCount > 8)
