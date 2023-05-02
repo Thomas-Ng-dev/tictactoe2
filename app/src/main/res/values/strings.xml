@@ -5,4 +5,11 @@
     <string name="new_game">New Game</string>
     <string name="gridHexValue"></string>
 
+    <!--    Main Menu-->
+    <string name="submit_player_names">Submit Player Names</string>
+    <string name="welcome">Welcome to Tic Tac Toe!</string>
+    <string name="player_1_LBL">Player 1</string>
+    <string name="player_2_LBL">Player 2</string>
+    <string name="enter_name">Enter Name</string>
+
 </resources>
