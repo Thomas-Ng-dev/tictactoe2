@@ -6,4 +6,9 @@
     <dimen name="gridColumn1LeftMargin">5dp</dimen>
     <dimen name="gridMargin">6dp</dimen>
     <dimen name="newGameMargin">50dp</dimen>
+
+<!--    Landscape-->
+    <dimen name="landGridValueSize">30sp</dimen>
+    <dimen name="landGridHexSize">90dp</dimen>
+    <dimen name="landLeftMargin">50dp</dimen>
 </resources>
