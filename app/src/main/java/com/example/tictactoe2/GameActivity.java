@@ -2,6 +2,7 @@ package com.example.tictactoe2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,16 +14,31 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView playerTurn;
     private Button[] grid = new Button[9];
     private Button newGame;
-    private int turnCount = 1;
+    private int turnCount = 0;
+    private String player1Name;
+    private String player2Name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // Get Player Names
+        player1Name = getIntent().getStringExtra("PLAYER_1_NAME");
+        if(player1Name.equals(""))
+        {
+            player1Name = "Player 1";
+        }
+        player2Name = getIntent().getStringExtra("PLAYER_2_NAME");
+        if(player2Name.equals(""))
+        {
+            player2Name = "Player 2";
+        }
+
         // Get UI elements
 
         // TextView to see whose turn it is
         playerTurn = (TextView) findViewById(R.id.playerTurn);
+        playerTurn.setText(String.format(getString(R.string.playerTurn), player1Name));
 
         // Get the buttons that form the grid and attach listeners to them
         for(int i = 0; i < grid.length; i++)
@@ -117,11 +133,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     {
         if((turnCount % 2) == 0)
         {
-            playerTurn.setText(String.format(getString(R.string.playerTurn), "Player 2"));
+            playerTurn.setText(String.format(getString(R.string.playerTurn), player2Name));
         }
         else
         {
-            playerTurn.setText(String.format(getString(R.string.playerTurn), "Player 1"));
+            playerTurn.setText(String.format(getString(R.string.playerTurn), player1Name));
         }
 
     }
@@ -133,11 +149,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public boolean isGameComplete()
     {
         boolean isGameComplete = false;
-        if(turnCount > 9)
-        {
-            Toast.makeText(this, "Draw!", Toast.LENGTH_LONG).show();
-            isGameComplete = true;
-        }
+
         /*
                 0   1   2
                 3   4   5
@@ -159,9 +171,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     grid[2].getText().toString().equals(grid[4].getText().toString()) && grid[4].getText().toString().equals(grid[6].getText().toString()) && !grid[2].getText().toString().equals(""))
             {
                 isGameComplete = true;
+                String message = "%s wins!";
+                String winner = "";
+                if(turnCount % 2 == 0)
+                {
+                    winner = player2Name;
+                }
+                else
+                {
+                    winner = player1Name;
+                }
+                playerTurn.setText(String.format(message, winner));
             }
         }
+        if(turnCount > 8)
+        {
+            Toast.makeText(this, "Draw!", Toast.LENGTH_LONG).show();
+            isGameComplete = true;
+            playerTurn.setText("");
+        }
         Log.i("Game Status", String.valueOf(isGameComplete));
+
         return isGameComplete;
     }
 
@@ -170,7 +200,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
      */
     public void newGame()
     {
-        turnCount = 1;
+        playerTurn.setText(String.format(getString(R.string.playerTurn), player1Name));
+        turnCount = 0;
         enableButtons();
         for(int i = 0; i < grid.length; i++)
         {
@@ -185,11 +216,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     {
         if((turnCount % 2) == 0)
         {
-            return "O";
+            return "X";
         }
         else
         {
-            return "X";
+            return "O";
         }
     }
 
