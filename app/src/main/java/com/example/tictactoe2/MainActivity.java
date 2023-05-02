@@ -46,6 +46,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * When rotating screen, state is destroyed. Save the state of variables to send
+     * to onRestoreInstancedState
+     * @param savedInstanceState
+     */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state.
+        savedInstanceState.putString("playerTurnState", playerTurn.getText().toString());
+        savedInstanceState.putInt("turnCountState", turnCount);
+        for(int i = 0; i < grid.length; i++)
+        {
+            savedInstanceState.putString("gridValue" + i, grid[i].getText().toString());
+        }
+
+
+        // Always call the superclass so it can save the view hierarchy state.
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    /**
+     * Load the variables from onSaveInstanceState
+     * @param savedInstanceState
+     */
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        // Always call the superclass so it can restore the view hierarchy.
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance.
+        playerTurn.setText(savedInstanceState.getString("playerTurnState"));
+        turnCount = savedInstanceState.getInt("turnCountState");
+        for(int i = 0; i < grid.length; i++)
+        {
+            grid[i].setText(savedInstanceState.getString("gridValue" + i));
+            if(!grid[i].getText().toString().equals(""))
+            {
+                disableButton(grid[i]);
+            }
+        }
+    }
+
     @Override
     public void onClick(View view)
     {
